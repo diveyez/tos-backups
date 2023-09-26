@@ -1,0 +1,1 @@
+plot Data = close;
