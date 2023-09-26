@@ -1,0 +1,35 @@
+input fastLength = 12;
+input slowLength = 26;
+input macdLength = 9;
+input averageType = AverageType.EXPONENTIAL;
+input price = close;
+input EMAperiod = 200;
+plot VWAP1 = VWAP(Period = AggregationPeriod.DAY);
+
+plot trendma = ExpAverage(price, EMAperiod);
+trendma.SetDefaultColor(Color.Cyan);
+def signal = reference MACD(fastLength, slowLength, macdLength, averageType).Avg;
+def macd = reference MACD(fastLength, slowLength, macdLength, averageType).Value;
+plot buymacd = macd crosses above signal and close > VWAP1 and macd[1] < 0;
+buymacd.SetPaintingStrategy(PaintingStrategy.BOOLEAN_ARROW_UP);
+buymacd.setDefaultColor(Color.Green);
+plot sellmacd = macd crosses below signal and close < VWAP1 and macd[1] > 0;
+sellmacd.SetPaintingStrategy(PaintingStrategy.BOOLEAN_ARROW_Down);
+sellmacd.setDefaultColor(Color.Red);
+
+input fastLength2 = 8;
+input slowLength2 = 17;
+input macdLength2 = 9;
+input averageType2 = AverageType.EXPONENTIAL;
+input price2 = close;
+input EMAperiod2 = 50;
+Def trendma2 = ExpAverage(price2, EMAperiod2);
+#trendma.SetDefaultColor(Color.Cyan);
+def signal2 = reference MACD(fastLength2, slowLength2, macdLength2, averageType2).Avg;
+def macd2 = reference MACD(fastLength2, slowLength2, macdLength2, averageType2).Value;
+plot buymacd2 = macd2 crosses above signal2 within 2 bars and low > trendma2 and macd2[1] < 0;
+buymacd2.SetPaintingStrategy(PaintingStrategy.BOOLEAN_ARROW_UP);
+buymacd2.setDefaultColor(Color.Green);
+#plot sellmacd = macd crosses below signal and high < trendma and macd[1] > 0;
+#sellmacd.SetPaintingStrategy(PaintingStrategy.BOOLEAN_ARROW_Down);
+#sellmacd.setDefaultColor(Color.Red); 
