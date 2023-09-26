@@ -1,0 +1,3 @@
+plot defaultPlot =
+    SimpleMovingAvg()
+    ;
