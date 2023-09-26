@@ -1,0 +1,10 @@
+input price = CLOSE;
+input length = 20;
+input nK = 1.5;
+input nBB = 2.0;
+input alertLine = 1.0;
+def squeezeDots = TTM_Squeeze(price, length, nK, nBB, alertLine).SqueezeAlert;
+def alertCount = if squeezeDots[1] == 0 and squeezeDots == 1 then 1 else if squeezeDots == 1 then alertCount[1] + 1 else 0;
+plot data = alertCount;
+data.AssignValueColor(if alertCount > 0 then Color.BLACK else Color.WHITE);
+AssignBackgroundColor(if alertCount == 0 then Color.RED else Color.GREEN);
