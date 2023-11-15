@@ -13,7 +13,7 @@ input space = .05; # the vertical space between the put open interest bar and ca
     DefineGlobalColor("CallColor", Color.GREEN);
 DefineGlobalColor("PutColor", Color.RED);
 AddLabel(yes, OptionSeries_YYMMDD + "C", GlobalColor("CallColor"));
-AddLabel(yes, OptionSeries_YYMMDD + "P", GlobalColor("PutColor")); a
+AddLabel(yes, OptionSeries_YYMMDD + "P", GlobalColor("PutColor"));
 def agg = AggregationPeriod.DAY;
 def openlevel = close(period = agg);
 def floor_or_ceiling = if roundup then Ceil(openlevel / 10) * 10 else Floor(openlevel / 10) * 10;

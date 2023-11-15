@@ -1,3 +1,4 @@
+declare lower;
 
 # Define the inputs
 input length = 20;
